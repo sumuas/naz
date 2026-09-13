@@ -20,7 +20,7 @@ app = Flask(__name__)
 # Oturum (session) çerezlerini imzalamak için gizli anahtar.
 # PythonAnywhere'de canlıya alırken bunu rastgele/uzun bir değerle değiştirin
 # ve mümkünse ortam değişkeninden okuyun.
-app.secret_key = os.environ.get('SECRET_KEY', 'ineprof-cok-gizli-anahtar-degistir-2026')
+app.secret_key = os.environ.get('SECRET_KEY', 'NAZAKS-cok-gizli-anahtar-degistir-2026')
 
 # Giriş Bilgileriniz
 USERS = {
@@ -533,7 +533,7 @@ def teklif_pdf():
     # HEADER
     header_data = [
         [
-            Paragraph("INEPROF<br/><font size=8 color='#555555'>İnovasyon ve Mühendislik Fabrikası<br/>CERRAH OSB 1021 SK INEGOL/BURSA</font>", title_style),
+            Paragraph("NAZ-AKS<br/><font size=8 color='#555555'>Aydınlatma ve Elektronik <br/>INEGOL/BURSA</font>", title_style),
             Paragraph("QUOTE / TEKLİF<br/><font size=9 color='#718096'>Tarih: <b>15/08/2026</b></font>", right_title)
         ]
     ]
@@ -649,7 +649,7 @@ def teklif_pdf():
     buffer.seek(0)
 
     response = Response(buffer.getvalue(), mimetype='application/pdf')
-    response.headers['Content-Disposition'] = f'inline; filename=INEPROF_Teklif_{teklif_no}.pdf'
+    response.headers['Content-Disposition'] = f'inline; filename=NAZAKS_Teklif_{teklif_no}.pdf'
     return response
 # 📑 SEVK FİŞİ PDF OLUŞTURMA ROTASI
 @app.route('/sevk_fisi_pdf', methods=['POST'])
@@ -685,7 +685,7 @@ def sevk_fisi_pdf():
     # HEADER
     header_data = [
         [
-            Paragraph("INEPROF<br/><font size=8 color='#555555'>İnovasyon ve Mühendislik Fabrikası<br/>CERRAH OSB 1021 SK INEGOL/BURSA</font>", title_style),
+            Paragraph("NAZAKS<br/><font size=8 color='#555555'>Aydınlatma ve Elektronik<br/>INEGOL/BURSA</font>", title_style),
             Paragraph("SEVK FİŞİ / DELIVERY NOTE", right_title)
         ]
     ]
@@ -744,7 +744,7 @@ def sevk_fisi_pdf():
 
     # KARŞILIKLI İMZA SATIRI
     imza_data = [
-        [Paragraph("<b>TESLİM EDEN (INEPROF)</b>", meta_label), Paragraph("<b>TESLİM ALAN (MÜŞTERİ)</b>", meta_label)],
+        [Paragraph("<b>TESLİM EDEN (NAZAKS)</b>", meta_label), Paragraph("<b>TESLİM ALAN (MÜŞTERİ)</b>", meta_label)],
         [Paragraph("Adı Soyadı:<br/>İmza / Tarih:", meta_val), Paragraph("Adı Soyadı:<br/>İmza / Tarih:", meta_val)]
     ]
     imza_table = Table(imza_data, colWidths=[260, 260])
@@ -794,7 +794,7 @@ def cari_ekstre_pdf(cari_id):
 
     header_data = [
         [
-            Paragraph("INEPROF<br/><font size=8 color='#555555'>Mühendislik & Endüstriyel Tasarım<br/>CERRAH OSB 1021 SK INEGOL/BURSA</font>", title_style),
+            Paragraph("NAZAKS<br/><font size=8 color='#555555'>Aydınlatma ve Elektronik <br/>INEGOL/BURSA</font>", title_style),
             Paragraph("CARİ HESAP EKSTRESİ<br/><font size=9 color='#718096'>Tarih: <b>15/08/2026</b></font>", right_title)
         ]
     ]
