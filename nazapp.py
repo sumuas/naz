@@ -13,31 +13,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from werkzeug.security import generate_password_hash, check_password_hash
 
-def init_db():
-    conn = sqlite3.connect('muhasebe.db') # Kendi db dosyanın adı
-    cursor = conn.cursor()
-    
-    # cariler tablosunu unvan sütunu dahil olacak şekilde garantiye alalım
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS cariler (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            unvan TEXT
-        )
-    ''')
-    
-    # hareketler tablosu (gerekli sütunlarla)
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS hareketler (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            cari_id INTEGER,
-            tutar REAL
-        )
-    ''')
-    
-    conn.commit()
-    conn.close()
 
-init_db()
 app = Flask(__name__)
 
 # Oturum (session) çerezlerini imzalamak için gizli anahtar.
