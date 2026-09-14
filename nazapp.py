@@ -13,7 +13,23 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from werkzeug.security import generate_password_hash, check_password_hash
 
+def init_db():
+    conn = sqlite3.connect('muhasebe.db') # Projede kullandığınız db dosya adı neyse
+    cursor = conn.cursor()
+    # cariler tablosunu yoksa oluşturan komut
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS cariler (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            unvan TEXT,
+            telefon TEXT
+            -- diğer sütunlarınızı buraya ekleyin
+        )
+    ''')
+    conn.commit()
+    conn.close()
 
+# Uygulama başlarken tabloyu oluşturan fonksiyonu çalıştır
+init_db()
 
 app = Flask(__name__)
 
