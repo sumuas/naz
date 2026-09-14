@@ -14,32 +14,30 @@ from reportlab.pdfbase.ttfonts import TTFont
 from werkzeug.security import generate_password_hash, check_password_hash
 
 def init_db():
-    # Projede kullandığınız veritabanı dosyasının adı neyse onu yazın (örn: database.db)
-    conn = sqlite3.connect('muhasebe.db') 
+    conn = sqlite3.connect('muhasebe.db') # Kendi db dosyanın adı
     cursor = conn.cursor()
     
-    # 1. Cariler Tablosu
+    # cariler tablosunu unvan sütunu dahil olacak şekilde garantiye alalım
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS cariler (
-            id INTEGER PRIMARY KEY AUTOINCREMENT
-            -- sütunlarınız
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            unvan TEXT
         )
     ''')
     
-    # 2. Hareketler Tablosu (Hata veren tablo)
+    # hareketler tablosu (gerekli sütunlarla)
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS hareketler (
-            id INTEGER PRIMARY KEY AUTOINCREMENT
-            -- hareketler tablosuna ait sütunlarınızı buraya ekleyin
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            cari_id INTEGER,
+            tutar REAL
         )
     ''')
     
     conn.commit()
     conn.close()
 
-# Uygulama ayağa kalkarken tabloları otomatik oluştur
 init_db()
-
 app = Flask(__name__)
 
 # Oturum (session) çerezlerini imzalamak için gizli anahtar.
